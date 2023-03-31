@@ -37,11 +37,11 @@ export default function Home() {
         <div>
             <Head>
                 <title>Text Summarizer</title>
-                <link rel="icon" href="/summarizer-icon.png" />
+                <link rel="icon" href="/icon.svg" />
             </Head>
 
             <main className={styles.main}>
-                <img src="/summarizer-icon.png" className={styles.icon} />
+                <img src="/icon.svg" className={styles.icon} />
                 <h3>Text Summarizer</h3>
                 <form onSubmit={onSubmit}>
                     <textarea
