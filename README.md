@@ -1,10 +1,18 @@
-This is a convenient interface for displaying text summaries
+TextSummaryAI: A Convenient Interface for Displaying Text Summaries
 
-To use it:
-1. Clone repo: git clone https://github.com/GolotaRoman91/TextSummaryAI
-2. cd TextSummaryAI
-3. Create .env file and add you OpenAI API key in variable named OPENAI_API_KEY
-4. npm run dev
-5. App ready to use!
+Follow these steps to set up and use TextSummaryAI:
 
-Use only master branch!
+1. Clone the repository: git clone https://github.com/GolotaRoman91/TextSummaryAI
+
+2. Navigate to the project directory: cd TextSummaryAI
+
+3. Create a .env file and add your OpenAI API key named OPENAI_API_KEY
+OPENAI_API_KEY=your_api_key_here
+
+4.Run the development server:
+npm run dev
+
+5.Start using the app:
+The application is now ready to use! Visit http://localhost:3000 in your browser.
+
+Please make sure to use the master branch only!
