@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 export default function Home() {
     const [textAreaInput, setTextAreaInput] = useState("");
     const [result, setResult] = useState();
+    const [mode, setMode] = useState("Summarize");
 
     async function onSubmit(event) {
         event.preventDefault();
@@ -14,7 +15,7 @@ export default function Home() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ text: textAreaInput }),
+                body: JSON.stringify({ text: textAreaInput, mode }),
             });
 
             const data = await response.json();
@@ -26,7 +27,7 @@ export default function Home() {
             }
 
             setResult(data.result);
-            setTextAreaInput("");
+            // setTextAreaInput("");
         } catch (error) {
             console.error(error);
             alert(error.message);
@@ -44,16 +45,45 @@ export default function Home() {
                 <img src="/icon.svg" className={styles.icon} />
                 <h3>Text Summarizer</h3>
                 <form onSubmit={onSubmit}>
-                    <textarea
-                        name="text"
-                        placeholder="Enter your text here"
-                        value={textAreaInput}
-                        onChange={(e) => setTextAreaInput(e.target.value)}
-                    ></textarea>
-                    <div className={styles.spacing}></div> {/* Add this line */}
-                    <input type="submit" value="Summarize Text" />
+                    <div className={styles.textareaAndButtons}>
+                        <div className={styles.textareaWrapper}>
+                            <textarea
+                                name="text"
+                                placeholder="Enter your text here"
+                                value={textAreaInput}
+                                onChange={(e) =>
+                                    setTextAreaInput(e.target.value)
+                                }
+                                className={styles.textarea}
+                            ></textarea>
+                        </div>
+                        <div className={styles.buttons}>
+                            <button
+                                type="button"
+                                className={`${styles.button} ${
+                                    mode === "Summarize" ? styles.selected : ""
+                                }`}
+                                onClick={() => setMode("Summarize")}
+                            >
+                                Summarize
+                            </button>
+                            <button
+                                type="button"
+                                className={`${styles.button} ${
+                                    mode === "MainLines" ? styles.selected : ""
+                                }`}
+                                onClick={() => setMode("MainLines")}
+                            >
+                                MainLines
+                            </button>
+                        </div>
+                    </div>
+                    <div className={styles.spacing}></div>
+                    <input type="submit" value="Submit Text" />
                 </form>
-                <div className={styles.result}>{result}</div>
+                {result && (
+                    <div className={styles.resultContainer}>{result}</div>
+                )}
             </main>
         </div>
     );
