@@ -6,9 +6,11 @@ export default function Home() {
     const [textAreaInput, setTextAreaInput] = useState("");
     const [result, setResult] = useState();
     const [mode, setMode] = useState("Summarize");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     async function onSubmit(event) {
         event.preventDefault();
+        setIsSubmitting(true);
         try {
             const response = await fetch("/api/generate", {
                 method: "POST",
@@ -31,6 +33,8 @@ export default function Home() {
         } catch (error) {
             console.error(error);
             alert(error.message);
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -79,7 +83,13 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={styles.spacing}></div>
-                    <input type="submit" value="Submit Text" />
+                    <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={styles.submitButton}
+                    >
+                        Summarize Text
+                    </button>
                 </form>
                 {result && (
                     <div className={styles.resultContainer}>{result}</div>
