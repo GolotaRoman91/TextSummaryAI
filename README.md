@@ -16,3 +16,4 @@ npm run dev
 The application is now ready to use! Visit http://localhost:3000 in your browser.
 
 Please make sure to use the master branch only!
+In the interface will be available buttons for use options, choose what you need
