@@ -6,6 +6,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
+    const mode = req.body.mode || "Summarize";
+
     if (!configuration.apiKey) {
         res.status(500).json({
             error: {
@@ -29,9 +31,9 @@ export default async function (req, res) {
     try {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: generatePrompt(text),
+            prompt: generatePrompt(text, mode),
             temperature: 0.6,
-            max_tokens: 150,
+            max_tokens: 2000,
         });
         res.status(200).json({
             result: completion.data.choices[0].text.trim(),
@@ -51,10 +53,19 @@ export default async function (req, res) {
     }
 }
 
-function generatePrompt(text) {
-    return `Please summarize the following text and provide the main points:
+function generatePrompt(text, mode) {
+    console.log(mode);
+    const modes = {
+        Summarize:
+            "Highlight the main thing in the text and describe it in 100 words at most:",
+        MainLines:
+            "Highlight the main points in the text and display them as a numbered list with talking points:",
+    };
 
-${text}
+    const inputText = modes[mode];
+    if (!inputText) {
+        throw new Error(`Unsupported mode: ${mode}`);
+    }
 
-Summary:`;
+    return `${inputText} ${text} Summary:`;
 }
