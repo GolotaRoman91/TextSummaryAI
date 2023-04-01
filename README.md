@@ -8,6 +8,7 @@ Follow these steps to set up and use TextSummaryAI:
 
 3. Create a .env file and add your OpenAI API key named OPENAI_API_KEY
 OPENAI_API_KEY=your_api_key_here
+(API key you can generate here: https://platform.openai.com/account/api-keys)
 
 4. Run the development server:
 npm run dev
