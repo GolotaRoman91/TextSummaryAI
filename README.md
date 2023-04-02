@@ -18,3 +18,5 @@ The application is now ready to use! Visit http://localhost:3000 in your browser
 
 Please make sure to use the master branch only!
 In the interface will be available buttons for use options, choose what you need
+It is important that the length of the input text does not exceed 2000 tokens, 
+check the number of tokens in the input text you can here: https://platform.openai.com/tokenizer
