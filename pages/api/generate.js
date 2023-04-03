@@ -60,6 +60,7 @@ function generatePrompt(text, mode) {
             "Highlight the main thing in the text and describe it in 100 words at most:",
         MainLines:
             "Highlight the main points in the text and display them as a numbered list with talking points:",
+        CodeExplain: "Explain me this code step by step:",
     };
 
     const inputText = modes[mode];
@@ -67,5 +68,5 @@ function generatePrompt(text, mode) {
         throw new Error(`Unsupported mode: ${mode}`);
     }
 
-    return `${inputText} ${text} Summary:`;
+    return `${inputText} ${text}`;
 }

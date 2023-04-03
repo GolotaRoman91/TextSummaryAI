@@ -6,6 +6,7 @@ const API_ENDPOINT = "/api/generate";
 const CONTENT_TYPE = "application/json";
 const SUMMARIZE_MODE = "Summarize";
 const MAIN_LINES_MODE = "MainLines";
+const EXPLAIN_CODE_MODE = "CodeExplain";
 
 function TextSummarizerForm({
     onSubmit,
@@ -52,6 +53,11 @@ function ModeButtons({ mode, setMode }) {
             />
             <ModeButton
                 mode={MAIN_LINES_MODE}
+                currentMode={mode}
+                setMode={setMode}
+            />
+            <ModeButton
+                mode={EXPLAIN_CODE_MODE}
                 currentMode={mode}
                 setMode={setMode}
             />
