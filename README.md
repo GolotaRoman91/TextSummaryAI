@@ -20,3 +20,6 @@ Please make sure to use the master branch only!
 In the interface will be available buttons for use options, choose what you need
 It is important that the length of the input text does not exceed 2000 tokens, 
 check the number of tokens in the input text you can here: https://platform.openai.com/tokenizer
+
+Added ability to explain code, just select CodeExplain and paste the code you would like to explain, 
+recommended to use for individual functions
