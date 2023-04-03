@@ -60,7 +60,8 @@ function generatePrompt(text, mode) {
             "Highlight the main thing in the text and describe it in 100 words at most:",
         MainLines:
             "Highlight the main points in the text and display them as a numbered list with talking points:",
-        CodeExplain: "Explain me this code step by step:",
+        CodeExplain:
+            "Explain me this code step by step, and wrap all code that will be in the answer in triple quotes ```:",
     };
 
     const inputText = modes[mode];
