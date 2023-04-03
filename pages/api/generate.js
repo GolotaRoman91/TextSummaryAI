@@ -1,4 +1,9 @@
 import { Configuration, OpenAIApi } from "openai";
+import {
+    codeExplainText,
+    SummarizeText,
+    MainLinesText,
+} from "../prompts/prompts";
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -56,12 +61,9 @@ export default async function (req, res) {
 function generatePrompt(text, mode) {
     console.log(mode);
     const modes = {
-        Summarize:
-            "Highlight the main thing in the text and describe it in 100 words at most:",
-        MainLines:
-            "Highlight the main points in the text and display them as a numbered list with talking points:",
-        CodeExplain:
-            "Explain me this code step by step, and wrap all code that will be in the answer in triple quotes ```:",
+        Summarize: SummarizeText,
+        MainLines: MainLinesText,
+        CodeExplain: codeExplainText,
     };
 
     const inputText = modes[mode];
