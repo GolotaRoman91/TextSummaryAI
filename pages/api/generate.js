@@ -1,8 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
 import {
     codeExplainText,
-    SummarizeText,
-    MainLinesText,
+    summarizeText,
+    mainLinesText,
 } from "../prompts/prompts";
 
 const configuration = new Configuration({
@@ -61,8 +61,8 @@ export default async function (req, res) {
 function generatePrompt(text, mode) {
     console.log(mode);
     const modes = {
-        Summarize: SummarizeText,
-        MainLines: MainLinesText,
+        Summarize: summarizeText,
+        MainLines: mainLinesText,
         CodeExplain: codeExplainText,
     };
 
