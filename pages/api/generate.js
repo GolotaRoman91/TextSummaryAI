@@ -4,6 +4,7 @@ import {
     summarizeText,
     mainLinesText,
 } from "../prompts/prompts";
+import axios from "axios";
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -34,15 +35,35 @@ export default async function (req, res) {
     }
 
     try {
-        const completion = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: generatePrompt(text, mode),
-            temperature: 0.6,
-            max_tokens: 2000,
-        });
-        res.status(200).json({
-            result: completion.data.choices[0].text.trim(),
-        });
+        const prompt = generatePrompt(text, mode);
+
+        const response = await axios.post(
+            "https://api.openai.com/v1/chat/completions",
+            {
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "system",
+                        content: prompt,
+                    },
+                    {
+                        role: "user",
+                        content: text,
+                    },
+                ],
+                temperature: 0.6,
+                max_tokens: 2000,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+                },
+            }
+        );
+
+        const completion = response.data.choices[0].message.content.trim();
+        res.status(200).json({ result: completion });
     } catch (error) {
         if (error.response) {
             console.error(error.response.status, error.response.data);
@@ -71,5 +92,5 @@ function generatePrompt(text, mode) {
         throw new Error(`Unsupported mode: ${mode}`);
     }
 
-    return `${inputText} ${text}`;
+    return inputText;
 }
